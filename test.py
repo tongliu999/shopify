@@ -3,11 +3,17 @@ from random import randint
 class wordGame:
     def __init__(self):
         self.word = self.randomWord()
+        self.guesses = 5
+        print("Welcome to Word Guess! You have", self.guesses, "turns to guess the word. Please enter your first guess:")
 
     def guessWord(self, newWord):
         if newWord == self.word:
+            print("You got it! Amazing!")
             return True
         else:
+            print("Wrong guess! Try again:")
+            self.guesses -= 1
+            print("You have", self.guesses, "guesses left.")
             return False
 
     def randomWord(self):
@@ -17,11 +23,13 @@ class wordGame:
 def main():
     game = wordGame()
     print(game.word)
-    userGuess = input()
-    if (game.guessWord(userGuess)):
-        print ("Win")
-    else:
-        print("Lose")
+    while True:
+        userGuess = input()
+        rightGuess = game.guessWord(userGuess)
+        if game.guesses == 0:
+            print("You're out of turns, game over!")
+            break
+    
 
 
 if __name__ == "__main__":
