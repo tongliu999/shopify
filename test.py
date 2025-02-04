@@ -2,12 +2,16 @@ from random import randint
 
 class wordGame:
     def __init__(self):
-        self.word = self.randomWord()
         self.guesses = 5
+        self.wordSet = {"able", "belt", "bolt", "cast", "cash", "knot", "note", "near", "over", "salt", "wind"}
+        self.word = self.randomWord()
         print("Welcome to Word Guess! You have", self.guesses, "turns to guess the word. Please enter your first guess:")
 
     def guessWord(self, newWord):
-        if newWord == self.word:
+        if newWord not in self.wordSet:
+            print("Not a valid word.")
+            return False
+        elif newWord == self.word:
             print("You got it! Amazing!")
             return True
         else:
@@ -17,8 +21,7 @@ class wordGame:
             return False
 
     def randomWord(self):
-        wordSet = {"able", "belt", "bolt", "cast", "cash", "knot", "note", "near", "over", "salt", "wind"}
-        return list(wordSet)[randint(0, len(wordSet) - 1)]
+        return list(self.wordSet)[randint(0, len(self.wordSet) - 1)]
 
 def main():
     game = wordGame()
